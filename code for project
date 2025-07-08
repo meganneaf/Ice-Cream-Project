@@ -1,0 +1,36 @@
+#include <iostream>
+using namespace std;
+
+int main()
+{
+    //welcome message
+    cout << "Welcome to the Custom Ice Cream Builder!" << endl << endl;
+    
+    //declare base flavor variable classes
+    string flavors[3] = {"Vanilla", "Chocolate", "Strawberry"};
+    string validator = "no";
+    int Flavor, Scoop;
+    
+    //flavor selection loop
+    while (validator == "no" || validator == "No") {
+    
+    //user inputs their choice of base flavor
+    cout << "Select your base ice cream flavor:\n1. Vanilla\n2. Chocolate\n3. Strawberry" << endl;
+    cin >> Flavor;
+    Flavor = Flavor - 1;
+    
+    //verify user's selection
+    cout << "Did you select " << flavors[Flavor] << "? (Yes or No)";
+    cin >> validator;
+    }
+    
+    //scoop amount loop
+    while (Scoop != 1 && Scoop != 2 && Scoop != 3){
+        
+    //user inputs how many scoops they want
+    cout << "How many Scoop? (1-3)" << endl;
+    cin >> Scoop;
+        if (Scoop != 1 && Scoop != 2 && Scoop != 3){
+        cout << "Invalid input." << endl;
+        }
+    }
