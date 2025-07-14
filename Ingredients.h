@@ -89,7 +89,7 @@ public:
 
 class IceCream : public Ingredients {
 public:
-    IceCream(string name, string quantityType, int maxQuantity);
+    IceCream(string name&, string quantityType&, int maxQuantity&);
 
     IceCream() = default;
 };
@@ -103,7 +103,7 @@ public:
 
 class Toppings : public Ingredients {
 public:
-    Toppings(string name, string quantityType, int maxQuantity);
+    Toppings(string name&, string quantityType&, int maxQuantity&);
 
     Toppings() = default;
 };
