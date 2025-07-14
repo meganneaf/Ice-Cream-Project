@@ -7,25 +7,13 @@
 using namespace std;
 
 // Constructor for IceCream class
-IceCream::IceCream(string name, string quantityType, int maxQuantity) {
-        setName(name);
-        setQuantityType(quantityType);
-        setMaxQuantity(maxQuantity);
-}
+IceCream::IceCream(string name, string quantityType, int maxQuantity);
 
 // Contstructor for Toppings class
-Toppings::Toppings(string name, string quantityType, int maxQuantity) {
-        setName(name);
-        setQuantityType(quantityType);
-        setMaxQuantity(maxQuantity);
-}
+Toppings::Toppings(string name, string quantityType, int maxQuantity);
 
 // Constructor for Sauce class
-Sauce::Sauce(string name, string quantityType, int maxQuantity) {
-        setName(name);
-        setQuantityType(quantityType);
-        setMaxQuantity(maxQuantity);
-}
+Sauce::Sauce(string name, string quantityType, int maxQuantity);
 
 
 
