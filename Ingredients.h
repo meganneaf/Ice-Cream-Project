@@ -89,9 +89,13 @@ public:
 
 class IceCream : public Ingredients {
 public:
-    IceCream(string name&, string quantityType&, int maxQuantity&);
+    IceCream(string name, string quantityType, int maxQuantity) {
+        setName(name);
+        setQuantityType(quantityType);
+        setMaxQuantity(maxQuantity);
+    }
 
-    IceCream() = default;
+   //IceCream() = default;
 };
 
 /**
@@ -103,9 +107,13 @@ public:
 
 class Toppings : public Ingredients {
 public:
-    Toppings(string name&, string quantityType&, int maxQuantity&);
+    Toppings(string name, string quantityType, int maxQuantity) {
+        setName(name);
+        setQuantityType(quantityType);
+        setMaxQuantity(maxQuantity);
+    }
 
-    Toppings() = default;
+    //Toppings() = default;
 };
 
 /**
@@ -116,8 +124,12 @@ public:
  */
 class Sauce : public Ingredients {
 public:
-    Sauce(string name, string quantityType, int maxQuantity);
+    Sauce(string name, string quantityType, int maxQuantity) {
+        setName(name);
+        setQuantityType(quantityType);
+        setMaxQuantity(maxQuantity);
+    }
 
-    Sauce() = default;
+    //Sauce() = default;
 };
 #endif //INGREDIENTS_H
