@@ -22,7 +22,7 @@ int main() {
     Toppings crushedOreos = Toppings("Crushed Oreos", "Tablespoon", 3);
     Toppings cherries = Toppings("Cherries", "Piece(s)", 5);
     Sauce hotFudge = Sauce("HotFudge", "Spoonful", 2);
-    Sauce caramelSauce = Sauce("CaramelSauce", "Spoonful", 2);
+    Sauce caramelSauce = Sauce("Caramel Sauce", "Spoonful", 2);
 
     // Push items to the vector for easy retrieval
     ingredients.push_back(vanilla);
@@ -37,7 +37,7 @@ int main() {
     // Greet the customer
     cout << "Welcome to the Custom Ice Cream Builder!" << endl;
 
-    cout << "Select your base ice cream flavor: ";
+    cout << "Select your base ice cream flavor:\n";
     menu = "1. Vanilla\n2. Chocolate\n3. Strawberry\n";
     //FIXME input validation goes here.
 
