@@ -11,8 +11,7 @@ int main()
     
     //declare base flavor variable classes
     string flavors[3] = {"Vanilla", "Chocolate", "Strawberry"};
-    string validator;
-    int Flavor, Scoop, i=0;
+    int Flavor, Scoop;
     
     //flavor selection loop
     do {
@@ -20,7 +19,6 @@ int main()
         cout << "Select your base ice cream flavor:\n1. Vanilla\n2. Chocolate\n3. Strawberry" << endl;
         cin >> Flavor;
         Flavor = Flavor - 1;
-
         //verifies that the user input doesn't include invalid characters
         //only numbers are acceptable values
         if (cin.fail()) {
@@ -37,9 +35,8 @@ int main()
     //scoop amount loop
     do {
         //user inputs how many scoops they want
-        cout << "How many Scoop? (1-3)" << endl;
+        cout << "How many scoops? (1-3)" << endl;
         cin >> Scoop;
-
         //verifies that the user input doesn't include invalid characters
         //only numbers are acceptable values
         if (cin.fail()) {
@@ -55,6 +52,100 @@ int main()
     } while (Scoop != 1 && Scoop != 2 && Scoop != 3);
     
     //declare topping variable classes
+    string toppings[3] = {"Sprinkles", "Crushed Oreos", "Cherries"}; //gives number selection names
+    int choice = 4, amount = 0; //user input and tracker for amount of toppings selected
+    string Top[2]; //stores topping names
+    int TbsS, TbsCO, Piece; // user input for tablespoon or pieces
+    int choices[3]; // stores topping number choice
+    //topping selection loop
+    do {
+        //user selects a topping
+        cout << "Select a topping (or 0 to finish):\n1. Sprinkles\n2. Crushed Oreos\n3. Cherries" << endl;
+        cin >> choice;
+        //verifies that the user input doesn't include invalid characters
+        //only numbers are acceptable values
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between 1 and 3.\n";
+            choice = 4;
+            continue;
+        }
+        //verifies that the user input is either 0, 1, 2, or 3
+        if (choice != 0 && choice != 1 && choice != 2 && choice != 3){
+            cout << "Invalid input. Please enter a number between 1 and 3." << endl;
+        }
+        //user's choices are stored
+        if (choice == 1 || choice == 2 || choice == 3) {
+            amount = amount + 1;
+            Top[amount] = toppings[choice - 1];
+            choices[amount] = choice;
+        }
+        //verifies selection has not already been selected
+        if ((amount == 2 && choice == choices[1]) || (amount == 3 && (choice == choices[1] || choice == choices[2]))) {
+            amount = amount - 1;
+            cout << "You have already selected this option.\n";
+        } else if (choice == 1 || choice == 2 || choice == 3){
+            //prompts user to select amount of topping based on what was chosen
+            switch (choice) {
+                //Sprinkles
+                case 1: do {
+                        cout << "How many tablespoons? (1-3)\n";
+                        //verifies that the user input doesn't include invalid characters
+                        //only numbers are acceptable values
+                        cin >> TbsS;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Invalid input. Please enter a number between 1 and 3.\n";
+                            continue;
+                        }
+                        //verifies that the user input is either 1, 2, or 3
+                        if (TbsS != 1 && TbsS != 2 && TbsS != 3) {
+                            cout << "Invalid input. Please enter a number between 1 and 3.\n";
+                        }
+                    } while (TbsS != 1 && TbsS != 2 && TbsS != 3);
+                    break;
+                //Crushed Oreos
+                case 2: do {
+                        cout << "How many tablespoons? (1-3)\n";
+                        //verifies that the user input doesn't include invalid characters
+                        //only numbers are acceptable values
+                        cin >> TbsCO;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Invalid input. Please enter a number between 1 and 3.\n";
+                            continue;
+                        }
+                        //verifies that the user input is either 1, 2, or 3
+                        if (TbsCO != 1 && TbsCO != 2 && TbsCO != 3) {
+                            cout << "Invalid input. Please enter a number between 1 and 3.\n";
+                        }
+                    } while (TbsCO != 1 && TbsCO != 2 && TbsCO != 3);
+                    break;
+                //Cherries
+                case 3: do {
+                        cout << "How many piecess? (1-5)\n";
+                        //verifies that the user input doesn't include invalid characters
+                        //only numbers are acceptable values
+                        cin >> Piece;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Invalid input. Please enter a number between 1 and 5.\n";
+                            continue;
+                        }
+                        //verifies that the user input is either 1, 2, or 3
+                        if (Piece != 1 && Piece != 2 && Piece != 3 && Piece != 4 && Piece != 5) {
+                            cout << "Invalid input. Please enter a number between 1 and 5.\n";
+                        } 
+                    } while (Piece != 1 && Piece != 2 && Piece != 3 && Piece != 4 && Piece != 5);
+                    break;
+            }
+        }
+    } while (choice != 0 && amount < 3);
+    
 
     return 0;
 }
