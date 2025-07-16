@@ -1,0 +1,313 @@
+#include <iostream>
+#include <string>
+#include <cctype>
+#include <limits>
+using namespace std;
+
+int validateInput(string prompt, int max, int min) {
+    int input;
+    cout << prompt << endl;
+        cin >> input;
+
+        //verifies that the user input doesn't include invalid characters
+        //only numbers are acceptable values
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid character. Please enter a number between " <<
+            min << " and " << max << endl;
+            input = validateInput(prompt, max, min);
+        }
+        
+        //verifies that the user input is either 1, 2, or 3
+        if (min>input || input>max){
+            cout << "Invalid quantity. Please enter a number between " <<
+            min << " and " << max << endl;
+            input = validateInput(prompt, max, min);
+        }
+        return input;
+}
+
+int main()
+{
+    //welcome message
+    cout << "Welcome to the Custom Ice Cream Builder!" << endl << endl;
+    
+    //declare base flavor variable classes
+    string flavors[3] = {"Vanilla", "Chocolate", "Strawberry"}; //gives names to user input number
+    int Flavor, Scoop; //user input for flavor or scoop amounts
+    string prompt = "Select your base ice cream flavor:\n1. Vanilla\n2. Chocolate\n3. Strawberry";
+    //flavor selection loop
+    /*do {
+        
+        //user inputs their choice of base flavor
+        cout << "Select your base ice cream flavor:\n1. Vanilla\n2. Chocolate\n3. Strawberry" << endl;
+        cin >> Flavor;
+        Flavor = Flavor - 1;
+    
+        //verifies that the user input doesn't include invalid characters
+        //only numbers are acceptable values
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid character. Please enter a number between 1 and 3.\n";
+            continue;
+        }
+        
+        //verifies that the user input is either 1, 2, or 3
+        if (!0<Flavor<2){
+            cout << "Invalid quantity. Please enter a number between 1 and 3." << endl;
+        }
+    } while (!0<Flavor<2);
+    */
+    Flavor = validateInput(prompt, 3, 1) - 1;
+    prompt = "How many scoops? (1-3)";
+    
+    Scoop = validateInput(prompt, 3, 1);
+    
+    //scoop amount loop
+    /*do {
+        
+        //user inputs how many scoops they want
+        cout << "How many scoops? (1-3)" << endl;
+        cin >> Scoop;
+        
+        //verifies that the user input doesn't include invalid characters
+        //only numbers are acceptable values
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid character. Please enter a number between 1 and 3.\n";
+            continue;
+        }
+        
+        //verifies that the user input is either 1, 2, or 3
+        if (Scoop != 1 && Scoop != 2 && Scoop != 3){
+            cout << "Invalid quantity. Please enter a number between 1 and 3." << endl;
+        }
+    } while (Scoop != 1 && Scoop != 2 && Scoop != 3);
+    */
+    
+    //declare topping variable classes
+    string toppings[3] = {"Sprinkles", "Crushed Oreos", "Cherries"}; //gives names to user input number
+    int choice = 4, amount = 0; //user input and tracker for amount of toppings selected
+    string Top[3]; //stores topping names
+    int TbsS, TbsCO, Piece; // user input for tablespoon or piece amounts
+    int choices[3]; // stores topping number choice
+    
+    //topping selection loop
+    do {
+        
+        //user selects a topping
+        cout << "Select a topping (or 0 to finish):\n1. Sprinkles\n2. Crushed Oreos\n3. Cherries" << endl;
+        cin >> choice;
+        
+        //verifies that the user input doesn't include invalid characters
+        //only numbers are acceptable values
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid character. Please enter a number between 1 and 3.\n";
+            choice = 4;
+            continue;
+        }
+        
+        //verifies that the user input is either 0, 1, 2, or 3
+        if (choice != 0 && choice != 1 && choice != 2 && choice != 3){
+            cout << "Invalid quantity. Please enter a number between 1 and 3." << endl;
+        }
+        
+        //user's choices are stored
+        if (choice == 1 || choice == 2 || choice == 3) {
+            Top[amount] = toppings[choice - 1]; //topping name
+            choices[amount] = choice; //topping number
+            amount = amount + 1;
+        }
+        
+        //verifies selection has not already been selected
+        if ((amount == 2 && choice == choices[0]) || (amount == 3 && (choice == choices[0] || choice == choices[1]))) {
+            amount = amount - 1;
+            cout << "You have already selected this option.\n";
+        } else if (choice == 1 || choice == 2 || choice == 3){
+            
+            //prompts user to select amount of topping based on what was chosen
+            switch (choice) {
+                
+                //Sprinkles
+                case 1: do {
+                        cout << "How many tablespoons? (1-3)\n";
+                        
+                        //verifies that the user input doesn't include invalid characters
+                        //only numbers are acceptable values
+                        cin >> TbsS;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Invalid character. Please enter a number between 1 and 3.\n";
+                            continue;
+                        }
+                        
+                        //verifies that the user input is either 1, 2, or 3
+                        if (TbsS != 1 && TbsS != 2 && TbsS != 3) {
+                            cout << "Invalid quantity. Please enter a number between 1 and 3.\n";
+                        }
+                    } while (TbsS != 1 && TbsS != 2 && TbsS != 3);
+                    break;
+                    
+                //Crushed Oreos
+                case 2: do {
+                        cout << "How many tablespoons? (1-3)\n";
+                        
+                        //verifies that the user input doesn't include invalid characters
+                        //only numbers are acceptable values
+                        cin >> TbsCO;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Invalid character. Please enter a number between 1 and 3.\n";
+                            continue;
+                        }
+                        
+                        //verifies that the user input is either 1, 2, or 3
+                        if (TbsCO != 1 && TbsCO != 2 && TbsCO != 3) {
+                            cout << "Invalid quantity. Please enter a number between 1 and 3.\n";
+                        }
+                    } while (TbsCO != 1 && TbsCO != 2 && TbsCO != 3);
+                    break;
+                    
+                //Cherries
+                case 3: do {
+                        cout << "How many pieces? (1-5)\n";
+                        
+                        //verifies that the user input doesn't include invalid characters
+                        //only numbers are acceptable values
+                        cin >> Piece;
+                        if (cin.fail()) {
+                            cin.clear();
+                            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+                            cout << "Invalid character. Please enter a number between 1 and 5.\n";
+                            continue;
+                        }
+                        
+                        //verifies that the user input is either 1, 2, or 3
+                        if (Piece != 1 && Piece != 2 && Piece != 3 && Piece != 4 && Piece != 5) {
+                            cout << "Invalid quantity. Please enter a number between 1 and 5.\n";
+                        } 
+                    } while (Piece != 1 && Piece != 2 && Piece != 3 && Piece != 4 && Piece != 5);
+                    break;
+            }
+        }
+    } while (choice != 0 && amount < 3);
+    
+    //declare sauce variable classes
+    string sauces[2] = {"Hot Fudge","Caramel Sauce"}; //gives names to user input number
+    int Sauce, Spoonful; //user input for sauce or spoonful amounts
+    
+    //sauce selection loop
+    do {
+        
+        //user inputs their choice of sauce
+        cout << "Select a sauce (1 only):\n1. Hot Fudge\n2. Caramel Sauce" << endl;
+        cin >> Sauce;
+        Sauce = Sauce - 1;
+    
+        //verifies that the user input doesn't include invalid characters
+        //only numbers are acceptable values
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid character. Please enter either 1 or 2.\n";
+            continue;
+        }
+        
+        //verifies that the user input is either 1 or 2
+        if (Sauce != 0 && Sauce != 1){
+            cout << "Invalid quantity. Please enter either 1 or 2." << endl;
+        }
+    } while (Sauce != 0 && Sauce != 1);
+    
+    //spoonful amount loop
+    do {
+        
+        //user inputs how many spoonfuls they want
+        cout << "How many spoonfuls? (1-2)" << endl;
+        cin >> Spoonful;
+        
+        //verifies that the user input doesn't include invalid characters
+        //only numbers are acceptable values
+        if (cin.fail()) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid character. Please enter either 1 or 2.\n";
+            continue;
+        }
+        
+        //verifies that the user input is either 1 or 2
+        if (Spoonful != 1 && Spoonful != 2){
+            cout << "Invalid quantity. Please enter either 1 or 2." << endl;
+        }
+    } while (Spoonful != 1 && Spoonful != 2);
+    
+    //print final list of ingredients and instructions
+    
+        //compilation of ingredients
+        cout << "\nYour Custom Ice Cream Sundae: " << endl;
+        
+        //base flavor
+        cout << flavors[Flavor] << " (" << Scoop;
+        
+        //scoop or scoops
+        if (Scoop == 1) {
+            cout << " Scoop)" << endl;
+        } else {
+            cout << " Scoops)" << endl;
+        }
+        
+        //toppings
+        int i = 0;
+        do { 
+            cout << Top[i];
+            
+            //type of topping
+            if (Top [i] == toppings[0]) { //sprinkles
+                cout << " (" << TbsS;
+                if (TbsS == 1) {
+                    cout << " Tablespoon)" << endl;
+                } else {
+                    cout << " Tablespoons)" << endl;
+                }
+            } else if (Top [i] == toppings[1]) { //crushed oreos
+                cout << " (" << TbsCO;
+                if (TbsCO == 1) {
+                    cout << " Tablespoon)" << endl;
+                } else {
+                    cout << " Tablespoons)" << endl;
+                }
+            } else if (Top[i] == toppings[2]) { //cherries
+                cout << " (" << Piece;
+                if (Piece == 1) {
+                    cout << " Piece)" << endl;
+                } else {
+                    cout << " Pieces)" << endl;
+                }
+            } 
+            i = i + 1;
+        } while (i < amount);
+        
+        //sauce
+        cout << sauces[Sauce] << " (" << Spoonful;
+        
+        //spoonful or spoonfuls
+        if (Spoonful == 1) {
+            cout << " Spoonful)" << endl;
+        } else {
+            cout << " Spoonfuls)" << endl;
+        }
+        //final message
+        if (amount == 0) {
+            cout << "\nAssembling Instructions: Layer the base, finish with sauce. Serve immediately!";
+        } else {
+            cout << "\nAssembling Instructions: Layer the base, add toppings, finish with sauce. Serve immediately!";
+        }
+    return 0;
+}
