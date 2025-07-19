@@ -53,43 +53,36 @@ string choiceQuantity(string type, int quantity) {
 // main program
 int main()
 {
-    //welcome message
-    cout << "Welcome to the Custom Ice Cream Builder!" << endl << endl;
+    // variables assignment
+    int choice;         //user input variable for all choices
+    string prompt;     // string prompt for selections
+    vector<string> toppings; // vector to store string of chosen items
     
-    //declare base flavor variable classes
-    string flavor; //variable for storing chosen flavor
-    int choice; //user input variable for all choices
-    
-    // string prompt for ice cream selection
-    string prompt; // variable for storing ice cream choices
-    
-    // declare toppings variables
+    // declare toppings variables 
     int amount = 0; //user input and tracker for amount of toppings selected
     vector<int> top = {-1}; //stores chosen toppings for validation of duplicates
-    vector<string> toppings; // vector to store string of quantities chosen
-    
-    //declare sauce variables
-    string sauce; //variable for storing sauce
-    string sauceQuantity; //user input for sauce or spoonful amounts
-    
+
+    //welcome message
+    cout << "Welcome to the Custom Ice Cream Builder!" << endl << endl;
+
     // initial prompt for ice cream choice
     prompt = "Select your base ice cream flavor:\n1. Vanilla\n2. Chocolate\n3. Strawberry";
 
     //flavor selection
     choice = validateInput(prompt, 1, 3);
     
+    prompt = "How many scoops? (1-3)";
     switch (choice) {
         case 1:
-            flavor = "Vanilla";
+            toppings.push_back("Vanilla " + choiceQuantity("scoop", validateInput(prompt,1,3)));
+            break;
         case 2: 
-            flavor = "Chocolate";
+            toppings.push_back("Chocolate " + choiceQuantity("scoop", validateInput(prompt,1,3)));
+            break;
         case 3:
-            flavor = "Strawberry";
+            toppings.push_back("Strawberry " + choiceQuantity("scoop", validateInput(prompt,1,3)));
+            break;
     }
-    
-    // prompt for number of scoops then append to flavor variable
-    prompt = "How many scoops? (1-3)";
-    flavor += " " + choiceQuantity("scoop", validateInput(prompt,1,3));
 
     //topping selection loop
     do{
@@ -136,35 +129,29 @@ int main()
     prompt = "Select a sauce (1 only):\n0. No Sauce\n1. Hot Fudge\n2. Caramel Sauce";
     choice = validateInput(prompt, 0, 2);
     
+    prompt = "How many spoonfuls? (1-2)";
     switch (choice) {
         case 0:
-            sauce = "No sauce";
+            toppings.push_back("No sauce");
             break;
         case 1:
-            sauce = "Hot Fudge ";
-            prompt = "How many spoonfuls? (1-2)";
-            sauce += " " + choiceQuantity("spoonful", validateInput(prompt,1,2));
+            toppings.push_back("Hot Fudge " + 
+                choiceQuantity("spoonful", validateInput(prompt,1,2)));
             break;
         case 2: 
-            sauce = "Caramel Sauce ";
-            prompt = "How many spoonfuls? (1-2)";
-            sauce += " " + choiceQuantity("spoonful", validateInput(prompt,1,2));
+            toppings.push_back("Caramel Sauce " + 
+                choiceQuantity("spoonful", validateInput(prompt,1,2)));
             break;
     }
 
     //print final list of ingredients and instructions
     
-    cout << "\nYour Custom Ice Cream Sundae: " << endl;
+    cout << "\nYour Custom Ice Cream Sundae:\n" << endl;
         
-    //base flavor
-    cout << flavor << endl;
-
     //toppings
     for (int i = 0; i < toppings.size(); i++){
         cout << toppings[i] << endl;
     }
-    //sauce
-    cout << sauce << endl;
 
     //final message
     cout << "\nAssembling Instructions: Layer the base, add chosen toppings, finish with sauce. Serve immediately!";
