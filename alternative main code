@@ -1,0 +1,96 @@
+#include <iostream>
+#include <string>
+#include <vector>
+#include <limits>
+#include <algorithm>
+
+using namespace std;
+
+// Function to get valid numeric input within a range
+int scoopInput(string menu, int min, int max) {
+    int value;
+    while (true) {
+        cout << menu << endl;
+        cin >> value;
+
+        if (cin.fail() || value < min || value > max) {
+            cin.clear();
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+            cout << "Invalid input. Please enter a number between " << min << " and " << max << "." << endl;
+        } else {
+            return value;
+        }
+    }
+}
+
+// Format item with quantity and plural/singular unit
+string formatTopping(string item, string unit, int quantity) {
+    return to_string(quantity) + " " + unit + (quantity > 1 ? "s" : "") + " of " + item;
+}
+
+int main() {
+    vector<string> sundaeIngredients;     // List of selected ingredients
+    vector<int> usedToppings;             // Track already chosen toppings
+
+    cout << "Welcome to the Ice Cream Sundae Builder!" << endl << endl;
+
+    // Base flavor selection
+    string iceCreamFlavors[] = { "Vanilla", "Chocolate", "Strawberry" };
+    int flavorChoice = scoopInput("Choose your ice cream base:\n1. Vanilla\n2. Chocolate\n3. Strawberry", 1, 3);
+    int scoopCount = scoopInput("How many scoops would you like? (1-3)", 1, 3);
+    sundaeIngredients.push_back(formatTopping(iceCreamFlavors[flavorChoice - 1], "scoop", scoopCount));
+
+    // Topping selection
+    int toppingChoice;
+    int toppingCount = 0;
+    while (toppingCount < 3) {
+        toppingChoice = scoopInput("Choose a topping (or 0 to finish):\n1. Sprinkles\n2. Crushed Oreos\n3. Cherries", 0, 3);
+
+        if (toppingChoice == 0) break;
+
+        if (find(usedToppings.begin(), usedToppings.end(), toppingChoice) != usedToppings.end()) {
+            cout << "That topping has already been selected. Please choose a different one." << endl;
+            continue;
+        }
+
+        usedToppings.push_back(toppingChoice);
+        int toppingAmount;
+
+        switch (toppingChoice) {
+            case 1:
+                toppingAmount = scoopInput("How many tablespoons of Sprinkles? (1-3)", 1, 3);
+                sundaeIngredients.push_back(formatTopping("Sprinkles", "tablespoon", toppingAmount));
+                break;
+            case 2:
+                toppingAmount = scoopInput("How many tablespoons of Crushed Oreos? (1-3)", 1, 3);
+                sundaeIngredients.push_back(formatTopping("Crushed Oreos", "tablespoon", toppingAmount));
+                break;
+            case 3:
+                toppingAmount = scoopInput("How many Cherries? (1-5)", 1, 5);
+                sundaeIngredients.push_back(formatTopping("Cherries", "piece", toppingAmount));
+                break;
+        }
+
+        toppingCount++;
+    }
+
+    // Sauce selection
+    int sauceChoice = scoopInput("Choose a sauce:\n0. No Sauce\n1. Hot Fudge\n2. Caramel Sauce", 0, 2);
+    if (sauceChoice == 0) {
+        sundaeIngredients.push_back("No sauce");
+    } else {
+        int sauceAmount = scoopInput("How many spoonfuls? (1-2)", 1, 2);
+        string sauceName = (sauceChoice == 1) ? "Hot Fudge" : "Caramel Sauce";
+        sundaeIngredients.push_back(formatTopping(sauceName, "spoonful", sauceAmount));
+    }
+
+    // Final output
+    cout << "\nYour Custom Ice Cream Sundae:\n" << endl;
+    for (const string& ingredient : sundaeIngredients) {
+        cout << "- " << ingredient << endl;
+    }
+
+    cout << "\nAssembly Instructions:\nStart with the base scoops, add your selected toppings, drizzle the sauce, and serve immediately." << endl;
+
+    return 0;
+}
