@@ -15,7 +15,7 @@
 #include <algorithm>
 using namespace std;
 
-// variable to validate the input and gracefully send error notifications
+// method to validate the input and gracefully send error notifications
 int validateInput(string prompt, int min, int max) {
     int input;
     cout << prompt << endl;
@@ -40,7 +40,7 @@ int validateInput(string prompt, int min, int max) {
         return input;
 }
 
-// string to return a string with quantity and type validated for multiples
+// method to return a string with quantity and type validated for multiples
 string choiceQuantity(string type, int quantity) {
     if (quantity > 1) {
         return "(" + to_string(quantity) + " " + type + "s)";
