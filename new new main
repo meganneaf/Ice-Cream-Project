@@ -1,10 +1,11 @@
 #include <iostream>
 #include <string>
 #include <limits>
+#include <regex>
 using namespace std;
 
 // Method to get a single digit input between min and max, no decimals or invalid chars allowed
-int getSingleDigitInput(const string& prompt, int min, int max) {
+int getSingleDigitInput(const string & prompt, int min, int max) {
     string input;
     int value;
 
@@ -12,20 +13,21 @@ int getSingleDigitInput(const string& prompt, int min, int max) {
     while (true) {
         cout << prompt << endl;
         cin >> input;
-
-        // Reject input if it is not a number or has multiple digits
-        if (input.length() == 1 && isdigit(input[0])) {
-            value = input[0] - '0';
-            if (value >= min && value <= max) {
-                return value;
-            }
-        }
-
-        // Clear error state and discard rest of input line to avoid infinite loop
         cin.clear();
         cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
-        cout << "Invalid character. Please enter a number between " << min << " and " << max << "." << endl;
+        bool neg = input[0] == '-';
+        string digits = neg ? input.substr(1) : input;
+
+        if (digits.empty() || !all_of(digits.begin(), digits.end(), ::isdigit) || (digits.size() > 1 && digits[0] == '0')) {
+            cout << "Invalid character used. Please enter an integer between " << min << " and " << max << "." << endl;
+            continue;
+        }
+
+        value = stoi(input);
+        if (value >= min && value <= max) return value;
+
+        cout << "Out of range. Please enter an integer between " << min << " and " << max << "." << endl;
     }
 }
 
