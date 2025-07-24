@@ -37,6 +37,9 @@ int validateInput(string prompt, int min, int max) {
             min << " and " << max << endl;
             input = validateInput(prompt, min, max);
         }
+        
+        // Clear buffer for decimals, spaces, etc.
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
         return input;
 }
 
